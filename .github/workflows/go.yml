@@ -7,7 +7,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         go: [1.13, 1.14, 1.15, 1.16]
-        
+
     name: ${{ matrix.os }} @ Go ${{ matrix.go }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -28,7 +28,9 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Install Dependencies
-        run: go get -v -t -d ./...
+        run: |
+         go get -v -t -d ./...
+         go get -v golang.org/x/lint/golint
 
       - name: Lint Check
         run: golint -set_exit_status ./...
