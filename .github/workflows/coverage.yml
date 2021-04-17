@@ -19,7 +19,9 @@ jobs:
           go get -v golang.org/x/lint/golint
 
       - name: Run coverage
-        run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+        run: |
+          export CODECOV_TOKEN=`b2bb77f1-5155-4f2b-90ab-bef6bd3ddeaa`
+          go test -race -coverprofile=coverage.out -covermode=atomic ./...
 
       - name: Upload coverage to Codecov
         run: bash <(curl -s https://codecov.io/bash)
